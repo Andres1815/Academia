@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Administrativo UNAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c2b5e 0%, #1a3f8a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(rgba(12, 43, 94, 0.9), rgba(26, 63, 138, 0.9)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+            margin-right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .welcome-message h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .welcome-message p {
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .features {
+            margin-top: 40px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .feature i {
+            background: rgba(255, 255, 255, 0.15);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .feature-text h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .feature-text p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .right-panel {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .login-header h2 {
+            color: #0c2b5e;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e1e5ee;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #1a3f8a;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 63, 138, 0.1);
+        }
+        
+        .security-code-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .code-display {
+            background: #f0f5ff;
+            border: 2px solid #e1e5ee;
+            border-radius: 10px;
+            padding: 14px 20px;
+            margin-right: 15px;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: #0c2b5e;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, #1a3f8a, #0c2b5e);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #0c2b5e, #1a3f8a);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(12, 43, 94, 0.2);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            color: #888;
+        }
+        
+        .divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 42%;
+            height: 1px;
+            background: #e1e5ee;
+        }
+        
+        .divider::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 42%;
+            height: 1px;
+            background: #e1e5ee;
+        }
+        
+        .biometric-options {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .biometric-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 25px;
+            background: white;
+            border: 2px solid #e1e5ee;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+        
+        .biometric-btn i {
+            margin-right: 10px;
+            font-size: 20px;
+            color: #1a3f8a;
+        }
+        
+        .biometric-btn:hover {
+            border-color: #1a3f8a;
+            transform: translateY(-2px);
+        }
+        
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .forgot-password a {
+            color: #1a3f8a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .forgot-password a:hover {
+            color: #0c2b5e;
+            text-decoration: underline;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            
+            .left-panel {
+                padding: 40px 30px;
+            }
+            
+            .right-panel {
+                padding: 40px 30px;
+            }
+        }
+        
+        /* Efectos de animación */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        
+        /* Efecto de toggle para mostrar/ocultar contraseña */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .password-toggle:hover {
+            color: #1a3f8a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Panel izquierdo con información institucional -->
+        <div class="left-panel">
+            <div>
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>UNAS</h1>
+                        <p>Universidad Nacional Autónoma de Sullana</p>
+                    </div>
+                </div>
+                
+                <div class="welcome-message">
+                    <h2>Portal Administrativo</h2>
+                    <p>Acceda al sistema de gestión administrativa de la universidad. Este portal está diseñado para el personal autorizado de la institución.</p>
+                </div>
+                
+                <div class="features">
+                    <div class="feature fade-in delay-1">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="feature-text">
+                            <h4>Acceso Seguro</h4>
+                            <p>Protegido con autenticación de múltiples factores</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature fade-in delay-2">
+                        <i class="fas fa-rocket"></i>
+                        <div class="feature-text">
+                            <h4>Rendimiento Óptimo</h4>
+                            <p>Interfaz rápida y eficiente para la gestión diaria</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature fade-in delay-3">
+                        <i class="fas fa-headset"></i>
+                        <div class="feature-text">
+                            <h4>Soporte 24/7</h4>
+                            <p>Asistencia técnica disponible en cualquier momento</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer fade-in delay-4">
+                <p>© 2023 Universidad Nacional Autónoma de Sullana. Todos los derechos reservados.</p>
+            </div>
+        </div>
+        
+        <!-- Panel derecho con formulario de login -->
+        <div class="right-panel">
+            <div class="login-header">
+                <h2>Iniciar Sesión</h2>
+                <p>Ingrese sus credenciales para acceder al portal</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group fade-in delay-1">
+                    <label class="form-label" for="email">Correo Institucional</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" class="form-control" placeholder="admin@unas.edu.pe" required>
+                    </div>
+                </div>
+                
+                <div class="form-group fade-in delay-2">
+                    <label class="form-label" for="password">Contraseña</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                        <span class="password-toggle" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="form-group fade-in delay-3">
+                    <label class="form-label">Código de Seguridad</label>
+                    <div class="security-code-container">
+                        <div class="code-display" id="securityCode">4BPWC</div>
+                        <div style="flex: 1;">
+                            <input type="text" id="codeInput" class="form-control" placeholder="Ingrese el código" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn fade-in delay-4">
+                    <i class="fas fa-sign-in-alt"></i> Ingresar al Portal
+                </button>
+            </form>
+            
+            <div class="divider fade-in delay-3">O ingresa con</div>
+            
+            <div class="biometric-options fade-in delay-4">
+                <button class="biometric-btn" id="fingerprintBtn">
+                    <i class="fas fa-fingerprint"></i> Huella
+                </button>
+                <button class="biometric-btn" id="faceIdBtn">
+                    <i class="fas fa-user-check"></i> FaceID
+                </button>
+            </div>
+            
+            <div class="forgot-password fade-in delay-4">
+                <a href="#" id="forgotPassword">¿Olvidó su contraseña?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generar un código de seguridad aleatorio (similar al original)
+            const securityCode = document.getElementById('securityCode');
+            const generateCode = () => {
+                const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ123456789';
+                let code = '';
+                for (let i = 0; i < 5; i++) {
+                    code += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return code;
+            };
+            
+            // Actualizar código de seguridad cada 30 segundos
+            securityCode.textContent = generateCode();
+            setInterval(() => {
+                securityCode.textContent = generateCode();
+                // Efecto visual al cambiar el código
+                securityCode.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    securityCode.style.transform = 'scale(1)';
+                }, 300);
+            }, 30000);
+            
+            // Mostrar/ocultar contraseña
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+            
+            // Simular autenticación con huella digital
+            document.getElementById('fingerprintBtn').addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Autenticación por huella digital simulada. En un entorno real se usaría la API de Web Authentication.');
+                    this.innerHTML = '<i class="fas fa-fingerprint"></i> Huella';
+                    this.disabled = false;
+                }, 1500);
+            });
+            
+            // Simular autenticación con FaceID
+            document.getElementById('faceIdBtn').addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Escaneando...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Autenticación por FaceID simulada. En un entorno real se usaría la API de reconocimiento facial.');
+                    this.innerHTML = '<i class="fas fa-user-check"></i> FaceID';
+                    this.disabled = false;
+                }, 1500);
+            });
+            
+            // Manejar enlace de contraseña olvidada
+            document.getElementById('forgotPassword').addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('email').value || 'admin@unas.edu.pe';
+                alert(`Se ha enviado un enlace de recuperación a: ${email}\n(Esta es una simulación)`);
+            });
+            
+            // Manejar envío del formulario
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const enteredCode = document.getElementById('codeInput').value;
+                const currentCode = securityCode.textContent;
+                
+                // Validación básica
+                if (!email || !password || !enteredCode) {
+                    alert('Por favor complete todos los campos');
+                    return;
+                }
+                
+                if (enteredCode.toUpperCase() !== currentCode) {
+                    alert('El código de seguridad es incorrecto');
+                    document.getElementById('codeInput').focus();
+                    return;
+                }
+                
+                // Simular proceso de login
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+                submitBtn.disabled = true;
+                
+                // Simular petición al servidor
+                setTimeout(() => {
+                    alert(`Credenciales enviadas:\nEmail: ${email}\n(Esta es una simulación, en un entorno real se validarían las credenciales con el servidor)`);
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            });
+            
+            // Efectos de animación al cargar
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(el => {
+                el.style.opacity = '0';
+            });
+            
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.style.opacity = '1';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
